@@ -1,5 +1,4 @@
-import { App, Editor, MarkdownView, Modal, Notice, Plugin, PluginSettingTab, Setting, TextAreaComponent } from 'obsidian';
-import { text } from 'stream/consumers';
+import { Notice, Plugin } from 'obsidian';
 import {RenameImagesPluginSettings, DEFAULT_SETTINGS, RenameImagesPluginSettingTab} from './settings';
 
 export default class RenameImagesPlugin extends Plugin {
@@ -45,7 +44,7 @@ export default class RenameImagesPlugin extends Plugin {
         }
 	}
 
-	// TODO 是否该用 async
+	// ? 是否该用 async
 	renameAllImages = async () => {
 		// TODO 实现 rename all images
 		new Notice(`${this.settings.imageNameExample}`);

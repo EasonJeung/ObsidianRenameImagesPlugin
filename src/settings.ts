@@ -1,4 +1,4 @@
-import { PluginSettingTab, Setting, App, Notice } from 'obsidian';
+import { PluginSettingTab, Setting, App} from 'obsidian';
 import RenameImagesPlugin from './main'
 
 export interface RenameImagesPluginSettings {
