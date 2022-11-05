@@ -44,6 +44,17 @@ export class RenameImagesPluginSettingTab extends PluginSettingTab {
                 })
             );		
 		
+        // Preview button
+        new Setting(containerEl)
+            .setName('Preview example image filename format')
+            .setDesc('Adjust settings below, then click Preview button')
+            .addButton((button) => {
+                button.setButtonText('Preview');
+                button.onClick(() => {
+                    this.noticeExamplePreview();
+                });
+            })
+
 		// Use folder path as prefix
 		new Setting(containerEl)
 			.setName('Use folder path as prefix')
@@ -94,5 +105,10 @@ export class RenameImagesPluginSettingTab extends PluginSettingTab {
                     this.plugin.saveSettings();
                 });
             });
+	}
+
+    noticeExamplePreview = () => {
+		// TODO 实现 notice example format preview
+		
 	}
 }
