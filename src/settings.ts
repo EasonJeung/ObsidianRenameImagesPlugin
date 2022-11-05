@@ -47,7 +47,7 @@ export class RenameImagesPluginSettingTab extends PluginSettingTab {
 		// Use folder path as prefix
 		new Setting(containerEl)
 			.setName('Use folder path as prefix')
-			.setDesc('Disable this, image name woulde be like \'filename-1.jpg\'. So if all your files have images in a dedicated folder, for example, Attachment folder, images of files with the same name in different folders may conflict.')
+			.setDesc('Disable this, image name would be like \'filename-1.jpg\'. So if all your files have images in a dedicated folder, for example, Attachment folder, images of files with the same name in different folders may conflict.')
 			.addToggle((toggle) => 
                 toggle.setValue(this.plugin.settings.useFolder).onChange(async (value) => {
 					this.plugin.settings.useFolder = value;
