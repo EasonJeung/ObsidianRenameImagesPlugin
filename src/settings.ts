@@ -3,11 +3,11 @@ import RenameImagesPlugin from './main'
 
 export interface RenameImagesPluginSettings {
     /*
-    Format example: Folder#ChildFolder_Demo file-1.jpg
-                          |           |         |
-    folderDelimiter ----->+           |         |
-    folderFileDelimiter ------------->+         |
-    suffixDelimiter --------------------------->+
+     Format example: Folder#ChildFolder_Demo file-1.jpg
+                           |           |         |
+     folderDelimiter ----->+           |         |
+     folderFileDelimiter ------------->+         |
+     suffixDelimiter --------------------------->+
     */
     useFullFolder: boolean;
     folderDelimiter: string;
@@ -106,7 +106,7 @@ export class RenameImagesPluginSettingTab extends PluginSettingTab {
             dropdown.addOption('-', '-');
             dropdown.addOption('_', '_');
             dropdown.addOption('#', '#');
-            dropdown.setValue(this.plugin.settings.folderDelimiter);
+            dropdown.setValue(this.plugin.settings.folderFileDelimiter);
             dropdown.onChange((option) => {
                 this.plugin.settings.folderFileDelimiter = option;
                 this.plugin.saveSettings();
