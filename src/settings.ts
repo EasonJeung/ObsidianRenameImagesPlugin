@@ -1,4 +1,4 @@
-import { PluginSettingTab, Setting, App} from 'obsidian';
+import { PluginSettingTab, Setting, App, Notice} from 'obsidian';
 import RenameImagesPlugin from './main'
 
 export interface RenameImagesPluginSettings {
@@ -13,17 +13,15 @@ export interface RenameImagesPluginSettings {
     folderDelimiter: string;
     folderFileDelimiter: string;
     suffixDelimiter: string;
-	imageNameExample: string;
     showRibbonIcon: boolean;
 }
 
 export const DEFAULT_SETTINGS: RenameImagesPluginSettings = {
     useFullFolder: true,
-    folderDelimiter: '.',
+    folderDelimiter: '-',
     folderFileDelimiter: '_',
     suffixDelimiter: '-',
     showRibbonIcon: true,
-	imageNameExample: 'Folder-ChildFolder_Demo file-1.jpg',
 }
 
 export class RenameImagesPluginSettingTab extends PluginSettingTab {
@@ -129,7 +127,22 @@ export class RenameImagesPluginSettingTab extends PluginSettingTab {
 	}
 
     noticeExamplePreview = () => {
-		// TODO 实现 notice example format preview
-		
+
+		const {useFullFolder, 
+			folderDelimiter, 
+			folderFileDelimiter, 
+			suffixDelimiter
+		} = this.plugin.settings;
+
+        const demoParts = ['Year', 'Month', 'Week', 'Demo file', '1.jpg'];
+
+        let demoName: string = '';
+        if (!useFullFolder) {
+            demoName = demoName.concat(demoParts[2], folderFileDelimiter, demoParts[3], suffixDelimiter, demoParts[4])
+        } else {
+            demoName = demoName.concat(demoParts[0], folderDelimiter, demoParts[1], folderDelimiter,demoParts[2], folderFileDelimiter, demoParts[3], suffixDelimiter, demoParts[4])
+        }
+
+        new Notice(`${demoName}`)
 	}
 }
