@@ -22,7 +22,7 @@ data.json
 .DS_Store
 
 # Exclude refererence project folder
-refererence
+reference
 
 # Exclude a backup file of main.ts
 main.origin.ts
