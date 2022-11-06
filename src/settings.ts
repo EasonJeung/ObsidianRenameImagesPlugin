@@ -2,19 +2,28 @@ import { PluginSettingTab, Setting, App} from 'obsidian';
 import RenameImagesPlugin from './main'
 
 export interface RenameImagesPluginSettings {
-    useFolder: boolean;
+    /*
+    Format example: Folder#ChildFolder_Demo file-1.jpg
+                          |           |         |
+    folderDelimiter ----->+           |         |
+    folderFileDelimiter ------------->+         |
+    suffixDelimiter --------------------------->+
+    */
+    useFullFolder: boolean;
     folderDelimiter: string;
+    folderFileDelimiter: string;
     suffixDelimiter: string;
 	imageNameExample: string;
     showRibbonIcon: boolean;
 }
 
 export const DEFAULT_SETTINGS: RenameImagesPluginSettings = {
-    useFolder: true,
+    useFullFolder: true,
     folderDelimiter: '.',
+    folderFileDelimiter: '_',
     suffixDelimiter: '-',
     showRibbonIcon: true,
-	imageNameExample: 'Folder#ChildFolder#Demo file-1.jpg',
+	imageNameExample: 'Folder#ChildFolder_Demo file-1.jpg',
 }
 
 export class RenameImagesPluginSettingTab extends PluginSettingTab {
@@ -54,25 +63,24 @@ export class RenameImagesPluginSettingTab extends PluginSettingTab {
                     this.noticeExamplePreview();
                 });
             })
+            
 
-		// Use folder path as prefix
+		// Use full folder path as prefix
 		new Setting(containerEl)
-			.setName('Use folder path as prefix')
-			.setDesc('Disable this, image name would be like \'filename-1.jpg\'. So if all your files have images in a dedicated folder, for example, Attachment folder, images of files with the same name in different folders may conflict.')
+			.setName('Use full folder path as prefix')
 			.addToggle((toggle) => 
-                toggle.setValue(this.plugin.settings.useFolder).onChange(async (value) => {
-					this.plugin.settings.useFolder = value;
+                toggle.setValue(this.plugin.settings.useFullFolder).onChange(async (value) => {
+					this.plugin.settings.useFullFolder = value;
 					await this.plugin.saveSettings()
                     this.display();
 				})
 			);
 
         
-        if (this.plugin.settings.useFolder) {
+        if (this.plugin.settings.useFullFolder) {
             // Choose delimiter between folder and its child folder
             new Setting(containerEl)
                 .setName('Delimiter between folder and its child folder or file')
-                .setDesc('Select which delimiter you prefer')
                 .addDropdown((dropdown) => {
                     dropdown.addOption('.', '.');
                     dropdown.addOption('', 'Use no delimiter');
@@ -87,12 +95,28 @@ export class RenameImagesPluginSettingTab extends PluginSettingTab {
                     });
                 });   
         }
+
+        // Choose delimiter between file and folder
+        new Setting(containerEl)
+        .setName('Delimiter between file and folder')
+        .addDropdown((dropdown) => {
+            dropdown.addOption('.', '.');
+            dropdown.addOption('', 'Use no delimiter');
+            dropdown.addOption(' ', 'Use space');
+            dropdown.addOption('-', '-');
+            dropdown.addOption('_', '_');
+            dropdown.addOption('#', '#');
+            dropdown.setValue(this.plugin.settings.folderDelimiter);
+            dropdown.onChange((option) => {
+                this.plugin.settings.folderFileDelimiter = option;
+                this.plugin.saveSettings();
+            });
+        });
 		
         
 		// Choose delimiter between filename and number
 		new Setting(containerEl)
 		    .setName('Delimiter between filename and number')
-            .setDesc('Select which delimiter you prefer')
             .addDropdown((dropdown) => {
                 dropdown.addOption('', 'Use no delimiter');
                 dropdown.addOption(' ', 'Use space');
