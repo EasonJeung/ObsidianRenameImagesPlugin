@@ -2,11 +2,12 @@ import { App, Vault } from 'obsidian';
 
 export const path = {
     /*
-     Example: 
-     Year/Month/Week/day demo file.md
-                  ||
-                  \/
-     [Year, Month, Week, day demo file]
+     * Example: 
+     * Year/Month/Week/day demo file.md
+     *              ||
+     *             \||/
+     *              \/
+     * [Year, Month, Week, day demo file]
     */ 
     split(fullPath: string): string[] {
         let segments: string[] = [];

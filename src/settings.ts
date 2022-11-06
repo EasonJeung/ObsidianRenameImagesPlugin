@@ -3,11 +3,11 @@ import RenameImagesPlugin from './main'
 
 export interface RenameImagesPluginSettings {
     /*
-     Format example: Folder-ChildFolder_Demo file-1.jpg
-                           |           |         |
-     folderDelimiter ----->+           |         |
-     folderFileDelimiter ------------->+         |
-     suffixDelimiter --------------------------->+
+     * Format example: Folder-ChildFolder_Demo file-1.jpg
+     *                       |           |         |
+     * folderDelimiter ----->+           |         |
+     * folderFileDelimiter ------------->+         |
+     * suffixDelimiter --------------------------->+
     */
     useFullFolder: boolean;
     folderDelimiter: string;

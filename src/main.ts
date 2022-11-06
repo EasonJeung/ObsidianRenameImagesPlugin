@@ -129,9 +129,6 @@ export default class RenameImagesPlugin extends Plugin {
 		const newNameWithExt = newNameStem.concat('.', ext);
 
 		if (newNameWithExt == originName) {
-			// ! test-start
-			console.log(newNameWithExt, 'no need to rename');
-			// ! test-end
 			return;
 		}
 
@@ -148,8 +145,8 @@ export default class RenameImagesPlugin extends Plugin {
 			return
 		}
 		/*
-		 In case fileManager.renameFile may not update the internal link in the active file,
-		 we manually replace the current line by manipulating the editor
+		 * In case fileManager.renameFile may not update the internal link in the active file,
+		 * we manually replace the current line by manipulating the editor
 		*/
 
 		// Get vault config, determine whether useMarkdownLinks is set
