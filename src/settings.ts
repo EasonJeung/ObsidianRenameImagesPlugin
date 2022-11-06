@@ -3,7 +3,7 @@ import RenameImagesPlugin from './main'
 
 export interface RenameImagesPluginSettings {
     /*
-     Format example: Folder#ChildFolder_Demo file-1.jpg
+     Format example: Folder-ChildFolder_Demo file-1.jpg
                            |           |         |
      folderDelimiter ----->+           |         |
      folderFileDelimiter ------------->+         |
@@ -23,7 +23,7 @@ export const DEFAULT_SETTINGS: RenameImagesPluginSettings = {
     folderFileDelimiter: '_',
     suffixDelimiter: '-',
     showRibbonIcon: true,
-	imageNameExample: 'Folder#ChildFolder_Demo file-1.jpg',
+	imageNameExample: 'Folder-ChildFolder_Demo file-1.jpg',
 }
 
 export class RenameImagesPluginSettingTab extends PluginSettingTab {
@@ -87,7 +87,6 @@ export class RenameImagesPluginSettingTab extends PluginSettingTab {
                     dropdown.addOption(' ', 'Use space');
                     dropdown.addOption('-', '-');
                     dropdown.addOption('_', '_');
-                    dropdown.addOption('#', '#');
                     dropdown.setValue(this.plugin.settings.folderDelimiter);
                     dropdown.onChange((option) => {
                         this.plugin.settings.folderDelimiter = option;
@@ -105,7 +104,6 @@ export class RenameImagesPluginSettingTab extends PluginSettingTab {
             dropdown.addOption(' ', 'Use space');
             dropdown.addOption('-', '-');
             dropdown.addOption('_', '_');
-            dropdown.addOption('#', '#');
             dropdown.setValue(this.plugin.settings.folderFileDelimiter);
             dropdown.onChange((option) => {
                 this.plugin.settings.folderFileDelimiter = option;
@@ -122,7 +120,6 @@ export class RenameImagesPluginSettingTab extends PluginSettingTab {
                 dropdown.addOption(' ', 'Use space');
                 dropdown.addOption('-', '-');
                 dropdown.addOption('_', '_');
-                dropdown.addOption('#', '#');
                 dropdown.setValue(this.plugin.settings.suffixDelimiter);
                 dropdown.onChange((option) =>{
                     this.plugin.settings.suffixDelimiter = option;
